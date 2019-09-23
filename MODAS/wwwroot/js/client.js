@@ -1,11 +1,11 @@
-﻿// Turn off ESLint (Windows): Tools - Options - Text Editor - Javascript - Linting
-$(function () {
+﻿$(function () {
     getEvents(1)
 
     function getEvents(page) {
         $.getJSON({
             url: "../api/event/page" + page,
             success: function (response, textStatus, jqXhr) {
+                //console.log(response);
                 showTableBody(response.events);
                 showPagingInfo(response.pagingInfo);
                 initButtons();
@@ -17,6 +17,7 @@ $(function () {
         });
     }
 
+    // event listeners for first/next/prev/last buttons
     $('#next, #prev, #first, #last').on('click', function () {
         getEvents($(this).data('page'));
     });
@@ -30,8 +31,8 @@ $(function () {
             html += "<i data-id=\"" + e[i].id + "\" data-checked=\"" + e[i].flag + "\" class=\"" + f + " fa-flag fa-lg flag\" />";
             html += "</td>";
             html += "<td>";
-            html += "<td> <div class=\"d-none d-md-block\">" + get_long_date(e[i].ts) + "</div >";
-            html += "<div class=\"d-md-none\">" + get_short_date(e[i].ts) + "</div ></td>";
+            html += "<div class=\"d-none d-md-block\">" + get_long_date(e[i].ts) + "</div >";
+            html += "<div class=\"d-md-none\">" + get_short_date(e[i].ts) + "</div >";
             html += "</td>";
             html += "<td>" + get_time(e[i].ts) + "</td>";
             html += "<td>" + e[i].loc + "</td>";
@@ -80,5 +81,5 @@ $(function () {
         hours = hours < 10 ? "0" + hours : hours + "";
         var minutes = time.split(":")[1];
         return hours + ":" + minutes + am_pm;
-    }   
+    }
 });

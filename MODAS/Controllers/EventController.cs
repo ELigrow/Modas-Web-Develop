@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Modas.Models;
 using Modas.Models.ViewModels;
@@ -31,7 +31,10 @@ namespace Modas.Controllers
                         Flagged = e.Flagged,
                         TimeStamp = e.TimeStamp,
                         LocationName = e.Location.Name
-                    }),
+                    })
+                    .OrderByDescending(e => e.TimeStamp)
+                    .Skip((page - 1) * PageSize)
+                    .Take(PageSize),
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,
