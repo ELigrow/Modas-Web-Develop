@@ -29,7 +29,10 @@
                         <td class="text-center">
                             <i data-id="@e.EventId" data-checked="@e.Flagged.ToString().ToLower()" class="@(e.Flagged ? "fas" : "far") fa-flag fa-lg flag"></i>
                         </td>
-                        <td>@String.Format("{0: ddd, MMM dd, yyyy}", e.TimeStamp)</td>
+                        <td>
+                            <div class="d-none d-md-block">@String.Format("{0: ddd, MMM dd, yyyy}", e.TimeStamp)</div>
+                            <div class="d-md-none"> @String.Format("{0: yyyy/MM/dd}", e.TimeStamp) </div>
+                        </td>
                         <td>@String.Format("{0:hh:mm tt}", e.TimeStamp)</td>
                         <td>@e.Location.Name</td>
                     </tr>
