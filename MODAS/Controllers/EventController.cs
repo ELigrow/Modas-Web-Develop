@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
 using Modas.Models;
 using Modas.Models.ViewModels;
@@ -61,6 +62,10 @@ namespace Modas.Controllers
         [HttpPut]
         // update event
         public Event Put([FromBody] Event evt) => repository.UpdateEvent(evt);
+
+        [HttpPatch("{id}")]
+        // update event (specific fields)
+        public void Patch(int id, [FromBody]JsonPatchDocument<Event> patch) => repository.PatchEvent(id, patch);
 
         [HttpDelete("{id}")]
         // delete event
